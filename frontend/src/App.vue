@@ -154,7 +154,7 @@ import {
   NCard, NSpace, NInput, NSelect, NButton, NGrid, NGi, NStatistic, 
   NDataTable, NTag, NDivider, NAlert, NCollapse, NCollapseItem, NModal, NThing, NEmpty
 } from 'naive-ui';
-import logoUrl from './assets/vue.svg';
+import logoUrl from './assets/favicon.svg';
 
 // --- ECharts 初始化 ---
 use([CanvasRenderer, PieChart, TitleComponent, TooltipComponent, LegendComponent]);
