@@ -1,5 +1,5 @@
 # === 階段 1: 建置前端 (Builder) ===
-FROM node:18-alpine as frontend-builder
+FROM node:20-alpine as frontend-builder
 
 WORKDIR /app/frontend
 
@@ -13,7 +13,7 @@ RUN npm run build
 
 
 # === 階段 2: 設定後端並運行 (Runtime) ===
-FROM node:18-alpine
+FROM node:20-alpine
 
 WORKDIR /app
 
