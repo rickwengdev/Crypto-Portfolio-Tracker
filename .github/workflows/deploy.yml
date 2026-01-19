@@ -1,0 +1,50 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches:
+      - main  # 當推送到 main 分支時觸發
+
+env:
+  PROJECT_ID: cryptotracker-484806  # <--- 請改成你的 GCP 專案 ID
+  REGION: asia-east1               # <--- 請改成你的 Artifact Registry 區域
+  REPO_NAME: crypto-repo           # <--- 你的 Artifact Registry 名稱
+  SERVICE_NAME: crypto-tracker     # Cloud Run 服務名稱
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 1. 登入 Google Cloud
+      - name: Google Auth
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+      # 2. 設定 Docker 環境
+      - name: Set up Cloud SDK
+        uses: 'google-github-actions/setup-gcloud@v1'
+
+      - name: Configure Docker
+        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
+
+      # 3. 建置並推送到 Artifact Registry
+      - name: Build and Push Docker Image
+        run: |
+          IMAGE_TAG=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+          docker build -t $IMAGE_TAG .
+          docker push $IMAGE_TAG
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+
+      # 4. 部署到 Cloud Run
+      - name: Deploy to Cloud Run
+        uses: 'google-github-actions/deploy-cloudrun@v1'
+        with:
+          service: ${{ env.SERVICE_NAME }}
+          image: ${{ env.IMAGE_TAG }}
+          region: ${{ env.REGION }}
+          flags: '--allow-unauthenticated' # 允許公開訪問
