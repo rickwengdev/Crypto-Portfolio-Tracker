@@ -6,8 +6,8 @@ on:
       - main  # 當推送到 main 分支時觸發
 
 env:
-  PROJECT_ID: cryptotracker-484806  # <--- 請改成你的 GCP 專案 ID
-  REGION: asia-east1               # <--- 請改成你的 Artifact Registry 區域
+  PROJECT_ID: crypto-tracker-487317  # <--- 請改成你的 GCP 專案 ID
+  REGION: us-central1               # <--- 請改成你的 Artifact Registry 區域
   REPO_NAME: crypto-repo           # <--- 你的 Artifact Registry 名稱
   SERVICE_NAME: crypto-tracker     # Cloud Run 服務名稱
 
