@@ -8,7 +8,7 @@
         <div class="nav-content">
           <div class="nav-brand">
             <img :src="logoUrl" alt="Logo" class="logo-icon" />
-            <span class="brand-text">Crypto Tracker</span>
+            <span class="brand-text">Crypto Portfolio Tracker</span>
           </div>
           <div class="nav-actions">
             <span class="currency-label">Display Currency:</span>
