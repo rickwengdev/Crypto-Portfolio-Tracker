@@ -7,7 +7,6 @@
     "express": "^5.2.1"
   },
   "name": "backend",
-  "types": "module",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -17,5 +16,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "module"
 }
