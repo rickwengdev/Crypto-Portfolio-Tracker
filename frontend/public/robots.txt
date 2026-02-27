@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# 告訴爬蟲你的 sitemap 在哪裡 (請換成你的真實網址)
+Sitemap: https://crypto-tracker-441067340318.us-central1.run.app/sitemap.xml
